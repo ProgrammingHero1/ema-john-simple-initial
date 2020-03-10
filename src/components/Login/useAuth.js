@@ -48,7 +48,7 @@ const Auth = () => {
     
     const singInWithGoogle = () =>{
         const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider)
+        return firebase.auth().signInWithPopup(provider)
         .then(res => {
             const singedInUser = getUser(res.user);
             setUser(singedInUser);
@@ -60,10 +60,12 @@ const Auth = () => {
         })
     }
     const signOut = () => {
-        firebase.auth().signOut().then(function() {
+        return firebase.auth().signOut().then(function() {
             setUser(null);
+            return true;
           }).catch(function(error) {
             console.log(error);
+            return false;
           });
     }
 
