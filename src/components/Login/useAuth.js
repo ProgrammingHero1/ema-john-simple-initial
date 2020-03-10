@@ -3,6 +3,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from "../../firebase.config";
 import { useState, createContext } from "react";
+import { Route, Redirect } from 'react-router-dom';
 
 
 firebase.initializeApp(firebaseConfig);
@@ -15,6 +16,27 @@ export const AuthContextProvider = (props) =>{
 }
 
 export const useAuth = () => useContext(AuthContext);
+
+export const PrivateRoute = ({ children, ...rest }) => {
+    const auth = useAuth();
+    return (
+      <Route
+        {...rest}
+        render={({ location }) =>
+          auth.user ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/login",
+                state: { from: location }
+              }}
+            />
+          )
+        }
+      />
+    );
+  }
 
 const getUser = user => {
     const {displayName, email, photoURL} = user;
