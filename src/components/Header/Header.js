@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
     const auth = useAuth();
-    console.log(auth);
     return (
         <div className="header">
             <img src={logo} alt=""/>
