@@ -30,7 +30,7 @@ function App(props) {
             <Route path="/review">
               <Review></Review>
             </Route>
-            <Route path="/orders">
+            <Route path="/inventory">
               <Inventory></Inventory>
             </Route>
             <Route exact path="/">
